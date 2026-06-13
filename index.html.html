@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toted — Sacramento Moving Tote Rentals</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0A0A0A;
+    --charcoal: #141414;
+    --steel: #262626;
+    --border: #2E2E2E;
+    --lime: #C8F135;
+    --white: #F5F5F0;
+    --muted: #6B6B6B;
+    --body: #AEAEA9;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--lime); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--lime) !important;
+    color: var(--black) !important;
+    padding: 8px 16px !important;
+    font-weight: 700 !important;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    padding: 60px 24px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 0 60px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--lime);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--lime);
+  }
+
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 140px);
+    letter-spacing: 0.02em;
+    line-height: 0.92;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .hero-headline .lime { color: var(--lime); }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--body);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 44px;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--lime);
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 16px 28px;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { opacity: 0.88; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 15px 28px;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-ghost:hover { border-color: var(--muted); }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    letter-spacing: 0.04em;
+    color: var(--lime);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* Floating tote graphic */
+  .hero-graphic {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.06;
+    pointer-events: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 320px;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--white);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 100px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 64px);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .section-body {
+    font-size: 15px;
+    color: var(--body);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .step {
+    background: var(--charcoal);
+    padding: 32px 28px;
+  }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: var(--steel);
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+  }
+
+  .step-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .step-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .step-accent {
+    width: 32px;
+    height: 2px;
+    background: var(--lime);
+    margin-bottom: 20px;
+  }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .pricing-card {
+    background: var(--charcoal);
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s;
+  }
+
+  .pricing-card:hover { border-color: var(--muted); }
+
+  .pricing-card.featured {
+    border-color: var(--lime);
+    position: relative;
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -1px;
+    right: 20px;
+    background: var(--lime);
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 10px;
+  }
+
+  .pricing-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .pricing-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .pricing-price sup {
+    font-size: 24px;
+    vertical-align: super;
+    letter-spacing: 0;
+  }
+
+  .pricing-period {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    margin-bottom: 24px;
+  }
+
+  .pricing-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+
+  .pricing-features {
+    list-style: none;
+    flex: 1;
+    margin-bottom: 28px;
+  }
+
+  .pricing-features li {
+    font-size: 13px;
+    color: var(--body);
+    padding: 7px 0;
+    border-bottom: 1px solid #1A1A1A;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pricing-features li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--lime);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .pricing-features li:last-child { border-bottom: none; }
+
+  .pricing-cta {
+    display: block;
+    text-align: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 13px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .pricing-card.featured .pricing-cta {
+    background: var(--lime);
+    color: var(--black);
+    border-color: var(--lime);
+    font-weight: 700;
+  }
+
+  .pricing-cta:hover { opacity: 0.8; }
+
+  .pricing-note {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    padding: 16px;
+    border: 1px solid var(--border);
+    background: var(--charcoal);
+  }
+
+  /* ── COVERAGE ── */
+  .coverage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .coverage-city {
+    background: var(--charcoal);
+    padding: 20px;
+  }
+
+  .coverage-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .coverage-detail {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .coverage-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--lime);
+    border-radius: 50%;
+    margin-bottom: 12px;
+  }
+
+  /* ── BOOKING FORM ── */
+  #book {
+    background: var(--charcoal);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group.full { grid-column: span 2; }
+
+  label {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  input, select, textarea {
+    background: var(--black);
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--lime);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--steel);
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  select option { background: var(--black); }
+
+  textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    margin-top: 8px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--lime);
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 18px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .submit-btn:hover { opacity: 0.88; }
+
+  .form-disclaimer {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* Form success state */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .form-success.show { display: block; }
+  .form-body.hide { display: none; }
+
+  .success-icon {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    color: var(--lime);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .success-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .success-text {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.7;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .about-values {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .value-item {
+    background: var(--charcoal);
+    padding: 20px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .value-line {
+    width: 2px;
+    height: 40px;
+    background: var(--lime);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .value-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+
+  .value-text {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── FAQ ── */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .faq-item {
+    background: var(--charcoal);
+    overflow: hidden;
+  }
+
+  .faq-q {
+    padding: 20px 24px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    user-select: none;
+  }
+
+  .faq-q:hover { color: var(--lime); }
+
+  .faq-icon {
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    color: var(--lime);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    line-height: 1;
+  }
+
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  .faq-a {
+    display: none;
+    padding: 0 24px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  .faq-item.open .faq-a { display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 24px;
+  }
+
+  .footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .footer-logo span { color: var(--lime); }
+
+  .footer-tagline {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.1em;
+    font-size: 9px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  .footer-contact {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .footer-contact a {
+    color: var(--lime);
+    text-decoration: none;
+  }
+
+  .footer-bottom {
+    max-width: 900px;
+    margin: 32px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .footer-handle {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hero-graphic { display: none; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: span 1; }
+    .about-grid { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; }
+    .steps { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">TOTED<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#book" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-graphic">TOTED</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Sacramento Moving Tote Rentals</div>
+    <h1 class="hero-headline">
+      Pack.<br><span class="lime">Move.</span><br>Done.
+    </h1>
+    <p class="hero-sub">Durable moving totes delivered to your door. No cardboard. No waste. No hardware store runs. We drop off, you move, we pick up.</p>
+    <div class="hero-actions">
+      <a href="#book" class="btn-primary">Book Your Totes</a>
+      <a href="#pricing" class="btn-ghost">See Pricing</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">27<span style="font-size:20px;">gal</span></div>
+        <div class="hero-stat-label">Per Tote</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">$65</div>
+        <div class="hero-stat-label">Starts At</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Cities Served</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">0</div>
+        <div class="hero-stat-label">Boxes Needed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section">
+    <div class="section-tag">The Process</div>
+    <h2 class="section-headline">Three Steps. That's It.</h2>
+    <p class="section-body">We handle the logistics so you can focus on the move. No assembly, no tape guns, no breaking down boxes at 11pm.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-accent"></div>
+        <div class="step-title">Book Online</div>
+        <div class="step-text">Pick your package, choose your delivery date, and submit your booking. We'll confirm within a few hours via email.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-accent"></div>
+        <div class="step-title">We Deliver</div>
+        <div class="step-text">Your totes arrive stacked and ready at your door. We bring a dolly too — no heavy lifting just to get started.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-accent"></div>
+        <div class="step-title">Move In, Move Out</div>
+        <div class="step-text">Pack up, move, unpack. When you're done, schedule your pickup. We scoop everything and you're finished.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-accent"></div>
+        <div class="step-title">We Pick Up</div>
+        <div class="step-text">We collect all totes from your new place, clean and sanitize them, and get them ready for the next family's move.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section">
+    <div class="section-tag">Packages</div>
+    <h2 class="section-headline">Simple Pricing. No Surprises.</h2>
+    <p class="section-body">Delivery and pickup are always included. All packages come with a dolly at no extra charge.</p>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-name">Studio</div>
+        <div class="pricing-price"><sup>$</sup>65</div>
+        <div class="pricing-period">1 week rental</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li>25 heavy-duty totes</li>
+          <li>1 dolly included</li>
+          <li>Delivery + pickup</li>
+          <li>Best for 1BR apartments</li>
+          <li>Small or light moves</li>
+        </ul>
+        <a href="#book" class="pricing-cta">Book Studio</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-name">Standard</div>
+        <div class="pricing-price"><sup>$</sup>95</div>
+        <div class="pricing-period">1 week rental</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li>40 heavy-duty totes</li>
+          <li>1 dolly included</li>
+          <li>Delivery + pickup</li>
+          <li>Best for 2BR apartments</li>
+          <li>Most common move size</li>
+        </ul>
+        <a href="#book" class="pricing-cta">Book Standard</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-name">Full Load</div>
+        <div class="pricing-price"><sup>$</sup>145</div>
+        <div class="pricing-period">2 week rental</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li>65 heavy-duty totes</li>
+          <li>2 dollies included</li>
+          <li>Delivery + pickup</li>
+          <li>Best for 3BR+ apartments</li>
+          <li>Extra time for big moves</li>
+        </ul>
+        <a href="#book" class="pricing-cta">Book Full Load</a>
+      </div>
+
+    </div>
+    <div class="pricing-note">
+      <strong style="color: var(--white);">Add-ons:</strong> Need more time? Add a week for $25. Extra totes available at $2/tote/day. Wardrobe totes $15 each. All add-ons requested at booking.
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- COVERAGE -->
+<section>
+  <div class="section" style="padding-bottom: 60px;">
+    <div class="section-tag">Service Area</div>
+    <h2 class="section-headline">We Cover Greater Sacramento.</h2>
+    <p class="section-body">Currently serving Sacramento and surrounding cities. Not sure if we cover your area? Email us and we'll let you know.</p>
+    <div class="coverage-grid">
+      <div class="coverage-city">
+        <div class="coverage-dot"></div>
+        <div class="coverage-name">Sacramento</div>
+        <div class="coverage-detail">All zip codes</div>
+      </div>
+      <div class="coverage-city">
+        <div class="coverage-dot"></div>
+        <div class="coverage-name">Elk Grove</div>
+        <div class="coverage-detail">Full coverage</div>
+      </div>
+      <div class="coverage-city">
+        <div class="coverage-dot"></div>
+        <div class="coverage-name">Citrus Heights</div>
+        <div class="coverage-detail">Full coverage</div>
+      </div>
+      <div class="coverage-city">
+        <div class="coverage-dot"></div>
+        <div class="coverage-name">Roseville</div>
+        <div class="coverage-detail">Full coverage</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- BOOKING FORM -->
+<section id="book">
+  <div class="section">
+    <div class="section-tag">Reservations</div>
+    <h2 class="section-headline">Book Your Totes.</h2>
+    <p class="section-body">Fill out the form and we'll confirm your booking within a few hours. We'll follow up at the email you provide with next steps and payment info.</p>
+
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">✓</div>
+      <div class="success-headline">You're Booked.</div>
+      <p class="success-text">We got your request and will confirm everything at your email within a few hours.<br>Get ready to move without the mess.</p>
+    </div>
+
+    <div class="form-body" id="formBody">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Jordan" required>
+        </div>
+
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Williams" required>
+        </div>
+
+        <div class="form-group full">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="city">Pickup City</label>
+          <select id="city" required>
+            <option value="" disabled selected>Select your city</option>
+            <option>Sacramento</option>
+            <option>Elk Grove</option>
+            <option>Citrus Heights</option>
+            <option>Roseville</option>
+            <option>Other — I'll confirm by email</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="package">Package</label>
+          <select id="package" required>
+            <option value="" disabled selected>Select a package</option>
+            <option>Studio — 25 totes / $65</option>
+            <option>Standard — 40 totes / $95</option>
+            <option>Full Load — 65 totes / $145</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="delivery">Requested Delivery Date</label>
+          <input type="date" id="delivery" required>
+        </div>
+
+        <div class="form-group">
+          <label for="pickup">Estimated Pickup Date</label>
+          <input type="date" id="pickup" required>
+        </div>
+
+        <div class="form-group full">
+          <label for="address">Delivery Address</label>
+          <input type="text" id="address" placeholder="1234 Oak St, Sacramento, CA 95838" required>
+        </div>
+
+        <div class="form-group full">
+          <label for="notes">Anything else we should know? (optional)</label>
+          <textarea id="notes" placeholder="Add-ons, gate codes, apartment access, special instructions..."></textarea>
+        </div>
+
+        <div class="form-group full form-submit">
+          <button class="submit-btn" onclick="handleSubmit()">Send My Booking Request</button>
+          <p class="form-disclaimer">By submitting, you agree to be contacted at the email above. Payment is collected upon booking confirmation — not right now.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section">
+    <div class="section-tag">About Toted</div>
+    <h2 class="section-headline">Sacramento Built. Move Ready.</h2>
+    <div class="about-grid">
+      <div>
+        <p style="color: var(--body); font-size: 15px; line-height: 1.8; margin-bottom: 20px; font-weight: 300;">Toted is a Sacramento-based moving tote rental service built for apartment renters who are tired of scrambling for boxes, taping them together, and hauling flat cardboard to the recycling bin at midnight.</p>
+        <p style="color: var(--body); font-size: 15px; line-height: 1.8; margin-bottom: 20px; font-weight: 300;">We started this because moving is already stressful enough. The totes part shouldn't be. So we handle the drop-off, you handle the move, and we handle the pickup. That's the whole deal.</p>
+        <p style="color: var(--muted); font-size: 13px; line-height: 1.8;">Questions? Reach us at <a href="mailto:hello@totedsac.com" style="color: var(--lime); text-decoration: none;">hello@totedsac.com</a></p>
+      </div>
+      <div class="about-values">
+        <div class="value-item">
+          <div class="value-line"></div>
+          <div>
+            <div class="value-title">No Cardboard, No Waste</div>
+            <div class="value-text">Our totes get reused hundreds of times. Every rental keeps dozens of boxes out of the landfill.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-line"></div>
+          <div>
+            <div class="value-title">Clean Between Every Use</div>
+            <div class="value-text">Every tote is sanitized before it hits your door. You get clean, ready-to-pack totes every time.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-line"></div>
+          <div>
+            <div class="value-title">Local & Responsive</div>
+            <div class="value-text">We're in Sacramento. When you have a question, you're talking to the person who shows up at your door.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- FAQ -->
+<section>
+  <div class="section">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-headline">Common Questions.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How do I pay? <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">After you submit your booking request, we'll confirm availability and send you a payment link via email. We accept all major cards. Payment is due before delivery.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What if I need the totes longer than expected? <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">No stress. Just email us before your rental period ends and we'll add a week for $25. Late returns without notice may incur a $10/day fee.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What size are the totes? <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Our standard totes are 27-gallon heavy-duty industrial bins with locking lids. About 30" x 20" x 15" — big enough for clothes, books, kitchen items, and most household goods.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do you help with packing or moving? <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">We're a tote rental service — we deliver and pick up, but we don't pack or move your stuff. Need movers? We can recommend a few good local companies.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What if a tote gets damaged? <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Normal wear and tear is fine — these totes are built tough. Intentional damage or loss is billed at $15 per tote. We'll note any issues at pickup and follow up by email.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I get same-day or next-day delivery? <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">We do our best! Email us at hello@totedsac.com and we'll let you know what's available. Rush bookings may have a small convenience fee depending on timing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">TOTED<span>.</span></div>
+      <div class="footer-tagline">Sacramento Moving Tote Rentals</div>
+    </div>
+    <div class="footer-links">
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#book">Book Now</a>
+      <a href="#about">About</a>
+    </div>
+    <div class="footer-contact">
+      <div style="margin-bottom:4px;">Service Area</div>
+      Sacramento · Elk Grove<br>
+      Citrus Heights · Roseville<br><br>
+      <a href="mailto:hello@totedsac.com">hello@totedsac.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Toted. Sacramento, CA</div>
+    <div class="footer-handle">@totedsac</div>
+  </div>
+</footer>
+
+<script>
+  // FAQ toggle
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // Form submit
+  function handleSubmit() {
+    const required = ['fname', 'lname', 'email', 'city', 'package', 'delivery', 'pickup', 'address'];
+    let valid = true;
+
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = '#FF4444';
+        valid = false;
+      } else {
+        el.style.borderColor = '';
+      }
+    });
+
+    if (!valid) {
+      alert('Please fill in all required fields before submitting.');
+      return;
+    }
+
+    // Build email body
+    const fname = document.getElementById('fname').value;
+    const lname = document.getElementById('lname').value;
+    const email = document.getElementById('email').value;
+    const city = document.getElementById('city').value;
+    const pkg = document.getElementById('package').value;
+    const delivery = document.getElementById('delivery').value;
+    const pickup = document.getElementById('pickup').value;
+    const address = document.getElementById('address').value;
+    const notes = document.getElementById('notes').value;
+
+    const subject = encodeURIComponent(`New Toted Booking Request — ${fname} ${lname}`);
+    const body = encodeURIComponent(
+`New Booking Request — Toted
+
+Name: ${fname} ${lname}
+Email: ${email}
+City: ${city}
+Package: ${pkg}
+Delivery Date: ${delivery}
+Pickup Date: ${pickup}
+Address: ${address}
+Notes: ${notes || 'None'}
+
+---
+Sent from totedsac.com`
+    );
+
+    window.location.href = `mailto:hello@totedsac.com?subject=${subject}&body=${body}`;
+
+    // Show success
+    document.getElementById('formBody').classList.add('hide');
+    document.getElementById('formSuccess').classList.add('show');
+  }
+
+  // Smooth scroll offset for fixed nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Set min date to today for date pickers
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('delivery').min = today;
+  document.getElementById('pickup').min = today;
+</script>
+</body>
+</html>
